@@ -117,7 +117,7 @@
  		UPDATE `real_estate`
  		SET 
  			`type` = #{type}
- 			`price` = #{price}
+ 			,`price` = #{price}
  			, `updatedAt` = NOW()
  		WHERE 
  			`id` = #{id}
