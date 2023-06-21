@@ -20,5 +20,10 @@ public class SellerBO {
 	public Seller getSellerInfo() {
 		return sellerMapper.selectSellerInfo();
 	}
+	
+	public Seller getSellerInfo(int id) {
+		return sellerMapper.selectSellerInfoById(id);
+	}
+	
 
 }

@@ -15,15 +15,15 @@
 		<form method="post" action="/lesson04/quiz01/add_seller">
 			<div class="form-group">
 				<label for="nickname">닉네임</label>
-				<input type="text" class="form-control col-2" id="nickname" name="nickname" placeholder="닉네임을 입력하세요"> 
+				<input type="text" class="form-control col-3" id="nickname" name="nickname" placeholder="닉네임을 입력하세요"> 
 			</div>
 			<div class="form-group">
 				<label for="profileImageUrl">프로필 사진 url</label>
-				<input type="text" class="form-control col-6" id="profileImageUrl" name="profileImageUrl"> 
+				<input type="text" class="form-control col-9" id="profileImageUrl" name="profileImageUrl"> 
 			</div>
 			<div class="form-group">
 				<label for="temperature">온도</label>
-				<input type="text" class="form-control col-2" id="temperature" name="temperature"> 
+				<input type="text" class="form-control col-3" id="temperature" name="temperature"> 
 			</div>
 			<input type="submit" class="btn btn-info" value="추가">
 		</form>

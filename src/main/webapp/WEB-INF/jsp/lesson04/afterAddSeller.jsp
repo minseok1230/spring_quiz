@@ -8,6 +8,6 @@
 
 </head>
 <body>
-	<h1>seller 저장 성공!!</h1>
+	<h1>seller 입력 성공!!</h1>
 </body>
 </html>

@@ -13,8 +13,7 @@
 	<div class="container">
 		<h1>판매자정보</h1>
 		<div>
-		
-			<img src="${result.profileImageUrl}" width="300" height="300">
+			<img src="${result.profileImageUrl}" alt="프로필이미지" width="300" height="300">
 		</div>
 		<div class="display-4">${result.nickname}</div>
 		<h2 class="text-warning">${result.temperature}</h2>

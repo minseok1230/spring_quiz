@@ -50,5 +50,10 @@ public class Seller {
 		this.updatedAt = updatedAt;
 	}
 	
+	@Override 
+	public String toString() {
+		return "닉네임:" +this.nickname;
+	}
+	
 	
 }
