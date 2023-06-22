@@ -18,23 +18,27 @@ public class Lesson04Quiz02Controller {
 	@Autowired
 	private RealtorBO realtorBO;
 	
-	//http://localhost/lesson04/quiz02/add_realtor_view
+	// 추가페이지
+	//http://localhost:8080/lesson04/quiz02/add_realtor_view
 	@GetMapping("/add_realtor_view")
 	public String addRealtorView() {
 		return "lesson04/addRealtor";
 	}
 	
-	//http://localhost/lesson04/quiz02/add_realtor
+	// 결과페이지
+	//http://localhost:8080/lesson04/quiz02/add_realtor
 	@PostMapping("/add_realtor")
 	public String addRealtor(
-			@ModelAttribute Realtor realtor,
+			@ModelAttribute Realtor realtor, // 객체가 하나일때는 생략가능! @ModelAttribute
 			Model model) {
 		
 		// insert db
-		realtorBO.getRealtor(realtor);
+		realtorBO.addRealtor(realtor);
 		
 		// select db
 		Realtor latestRealtor = realtorBO.getRealtorById(realtor.getId());
+		
+		// model 담기
 		model.addAttribute("realtor", latestRealtor);
 		
 		return "lesson04/afterAddRealtor";

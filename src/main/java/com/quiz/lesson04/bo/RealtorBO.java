@@ -13,10 +13,11 @@ public class RealtorBO {
 	private RealtorMapper realtorMapper; 
 	
 	// insert
-	public void getRealtor(Realtor realtor) {
+	public void addRealtor(Realtor realtor) {
 		realtorMapper.insertRealtor(realtor);
 	}
 	
+	// select
 	public Realtor getRealtorById(int id) {
 		return realtorMapper.selectRealtorById(id);
 	}

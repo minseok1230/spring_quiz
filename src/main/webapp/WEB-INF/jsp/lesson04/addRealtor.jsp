@@ -29,7 +29,7 @@
 				<label for="grade">등급</label>
 				<input type="text" class="form-control col-6" id="grade" name="grade">
 			</div>
-			<input type="submit" class="btn btn-info" value="추가">
+			<input type="submit" class="btn btn-primary" value="추가">
 		</form>
 	</div>
 </body>

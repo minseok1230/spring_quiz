@@ -33,7 +33,6 @@
 				<th>등급</th>
 				<td>${realtor.grade}</td>
 			</tr>
-			
 		</table>
 	</div>
 

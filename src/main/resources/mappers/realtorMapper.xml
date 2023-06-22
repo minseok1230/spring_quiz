@@ -27,7 +27,7 @@
  		)
  	</insert>
  	
- 	<select id="selectRealtorById" resultType="com.quiz.lesson04.domain.Realtor">
+ 	<select id="selectRealtorById" parameterType="int" resultType="com.quiz.lesson04.domain.Realtor">
  		SELECT
  			`id`
  			,`office`
