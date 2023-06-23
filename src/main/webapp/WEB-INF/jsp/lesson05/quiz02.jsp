@@ -47,25 +47,29 @@
 					<tr>
 						<td>${member.name}</td>
 						<td>${member.phoneNumber}</td>
-						<c:choose>
-							<c:when test="${member.grade == 'VIP'}">
-								<td class="text-danger">${member.grade}</td>
-							</c:when>
-							<c:when test="${member.grade eq 'GOLD'}">
-								<td class="text-warning">${member.grade}</td>
-							</c:when>
-							<c:otherwise>
-						<td>${member.grade}</td>
-							</c:otherwise>
-						</c:choose>
-						<c:choose>
-							<c:when test="${member.point >= 5000}">
-								<td class="text-primary">${member.point}p</td>
-							</c:when>
-							<c:otherwise>
-								<td>${member.point}p</td>
-							</c:otherwise>
-						</c:choose>
+						<td>
+							<c:choose>
+								<c:when test="${member.grade == 'VIP'}">
+									<span class="text-danger">${member.grade}</span>
+								</c:when>
+								<c:when test="${member.grade eq \"GOLD\"}">
+									<span class="text-warning">${member.grade}</span>
+								</c:when>
+								<c:otherwise>
+									<span>${member.grade}</span>
+								</c:otherwise>
+							</c:choose>
+						</td>
+						<td>
+							<c:choose>
+								<c:when test="${member.point >= 5000}">
+									<span class="text-primary">${member.point}p</span>
+								</c:when>
+								<c:otherwise>
+									<span>${member.point}p</span>
+								</c:otherwise>
+							</c:choose>
+						</td>
 					</tr>
 				</c:forEach>
 			</tbody>
