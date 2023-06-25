@@ -27,13 +27,23 @@
 			</thead>
 			<tbody>
 				<c:forEach items="${members}" var="member" varStatus="status">
+				<c:set var="intro" value="${member.getIntroduce()}"/>
 					<tr>
 						<td>${status.count}</td>
 						<td>${member.getName()}</td>
 						<td>${member.getPhoneNumber()}</td>
 						<td>${fn:replace(member.getNationality(), '시대', '-')}</td>
-						<td>${member.getEmail()}</td>
-						<td>${member.getIntroduce()}</td>
+						<td><b>${fn:split(member.getEmail(),'@')[0]}</b>@${fn:split(member.getEmail(),'@')[1]}</td>
+						<td>
+							<c:choose>
+								<c:when	test="${fn:length(intro) > 15}">
+									${fn:substring(intro, 0, 15)} ...
+								</c:when>
+								<c:otherwise>
+									${intro}
+								</c:otherwise>
+							</c:choose>
+						</td>
 					</tr>
 				</c:forEach>
 			</tbody>
