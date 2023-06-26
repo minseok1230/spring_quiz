@@ -14,6 +14,7 @@
 <body>	
 	<div class="container">
 		<h1>회원 정보 리스트</h1>
+		<img src="/image/weather/sunny.jpg">
 		<table class="table text-center">
 			<thead>
 				<tr>
@@ -31,7 +32,16 @@
 					<tr>
 						<td>${status.count}</td>
 						<td>${member.getName()}</td>
-						<td>${member.getPhoneNumber()}</td>
+						<td>
+							<c:choose>
+								<c:when test="${fn:startsWith(member.getPhoneNumber(), '010')}">
+									${member.getPhoneNumber()}
+								</c:when>
+								<c:otherwise>
+									유효하지 않은 번호 입니다.
+								</c:otherwise>
+							</c:choose>
+						</td>
 						<td>${fn:replace(member.getNationality(), '시대', '-')}</td>
 						<td><b>${fn:split(member.getEmail(),'@')[0]}</b>@${fn:split(member.getEmail(),'@')[1]}</td>
 						<td>

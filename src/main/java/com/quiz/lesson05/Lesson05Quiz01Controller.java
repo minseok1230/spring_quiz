@@ -11,7 +11,7 @@ public class Lesson05Quiz01Controller {
 		//view화면
 		@GetMapping("/weather_history_view")
 		public String weatherHistoryView() {
-			return "lesson05/"
+			return "lesson05/quiz04";
 		}
 		
 

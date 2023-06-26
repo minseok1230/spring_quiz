@@ -1,0 +1,17 @@
+@charset "UTF-8";
+.wrap{width:1500px;
+	margin:auto;}
+.contents{min-height:700px;}
+a, a:hover {
+	color:#FFFFFF;
+	font-size: 20px;
+}
+footer{height:90px;}
+nav{
+	width:12%;
+	background-color: #5882FA;	
+}
+.rightMain{width:88%;}
+
+.tableBox{width:90%}
+
