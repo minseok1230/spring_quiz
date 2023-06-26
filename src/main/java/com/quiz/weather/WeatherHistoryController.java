@@ -28,7 +28,7 @@ public class WeatherHistoryController {
 		
 		return "weather/getWeather";
 	}
-	
+	//localhost:8080/weather/weather_add
 	@GetMapping("/weather_add")
 	public String addWeather() {
 		
