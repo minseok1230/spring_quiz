@@ -1,0 +1,11 @@
+@charset "UTF-8";
+header{height:120px}
+.contents{min-height:700px;}
+footer{height:80px}
+.storeBox{
+	border-radius: 10px;
+}
+
+a {
+	color: black;
+}

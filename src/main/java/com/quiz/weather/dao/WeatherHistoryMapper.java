@@ -1,6 +1,5 @@
 package com.quiz.weather.dao;
 
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
@@ -13,4 +12,14 @@ public interface WeatherHistoryMapper {
 	public List<WeatherHistory> selectWeatherHistory(); 
 	
 	public void insertNewWeather(WeatherHistory addWeatherHistory);
+	
+	/*
+	public void insertNewWeather(
+			@Param("date") Date date,
+			@Param("weather") String weather,
+			@Param("microDust") String microDust,
+			@Param("temperatures") double temperatures,
+			....
+	);
+	 * */
 }

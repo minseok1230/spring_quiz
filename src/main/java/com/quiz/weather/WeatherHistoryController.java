@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,18 +37,19 @@ public class WeatherHistoryController {
 	//localhost:8080/weather/weather_add
 	@GetMapping("/weather_add")
 	public String addWeather() {
-		return "weather/addWeather";
-	}
+		return "weather/addWeather";	}
 	
-	// 날씨 추가
+	// 날씨 추가 (insert)
 	@PostMapping("/weather_adding")
 	public String weatherAdding(
 			@ModelAttribute WeatherHistory addWeatherHistory
+			//@RequestParam("date") @DateTimeFormat(pattern = "yyyy-MM-dd") Date date // 그냥 string으로 받아도 상관없다.
 			) {
 		
-			//insert db
+			//insert DB
 			weatherHistoryBO.addNewWeather(addWeatherHistory);
-			return "redirect:/weather_hi";
+//			response.sendRedirect("/weather/weather_history_view");
+			return "redirect:/weather/weather_history_view"; //새 request 수행 
 	}
 	
 	

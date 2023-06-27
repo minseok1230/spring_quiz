@@ -20,53 +20,7 @@
 		<div class="contents d-flex">
 			<jsp:include page="nav.jsp" />
 			<div class="rightMain">
-				<h2 class="ml-5 mt-4 font-weight-bold">과거날씨</h2>
-				<div class="d-flex justify-content-center align-items-center">
-					<div class="tableBox">
-						<table class="table text-center">
-							<thead>
-								<tr>
-									<th>날짜</th>
-									<th>날씨</th>
-									<th>기온</th>
-									<th>강수량</th>
-									<th>미세먼지</th>
-									<th>풍속</th>
-								</tr>
-							</thead>
-							<tbody>
-								<c:forEach items="${weatherHistory}" var="weather">
-								<fmt:parseDate value="${weather.getDate()}" pattern="yyyy-MM-dd" var="strDate"/>
-									<tr>
-										<td>
-											<fmt:formatDate value="${strDate}" pattern="yyyy년 M월 dd일"/>
-										</td>
-										<td>
-											<c:choose>
-												<c:when test="${weather.getWeather() == '비'}">
-													<img src="/image/weather/rainy.jpg">
-												</c:when>
-												<c:when test="${weather.getWeather() == '구름조금'}">
-													<img src="/image/weather/partlyCloudy.jpg">
-												</c:when>
-												<c:when test="${weather.getWeather() == '흐림'}">
-													<img src="/image/weather/cloudy.jpg">
-												</c:when>
-												<c:when test="${weather.getWeather() == '맑음'}">
-													<img src="/image/weather/sunny.jpg">
-												</c:when>
-											</c:choose>
-										</td>
-										<td>${weather.getTemperatures()}°C</td>
-										<td>${weather.getPrecipitation()}mm</td>
-										<td>${weather.getMicroDust()}</td>
-										<td>${weather.getWindSpeed()}km/h</td>
-									</tr>
-								</c:forEach>
-							</tbody>
-						</table>
-					</div>
-				</div>
+				<jsp:include page="rightMain.jsp" />
 			</div>
 		</div>
 		<footer>

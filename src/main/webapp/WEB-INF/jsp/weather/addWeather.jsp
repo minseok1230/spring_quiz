@@ -5,6 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <title>날씨 추가</title>
+
+
 <%-- jquery --%>
 <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
 <%--부트스트랩 --%>
@@ -13,7 +15,7 @@
 <%--datepicker --%>
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
+<!-- 내가만든 스타일시트 -->
 <link href="/css/weather/style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
@@ -22,7 +24,7 @@
 				<jsp:include page="nav.jsp" />
 				<%-- 날씨 추가 --%>
 				<div class="rightMain col-8 mt-3 ml-5">
-					<h3>날짜 입력</h3>
+					<h2 class="ml-5 mt-4 font-weight-bold mb-5">날씨 입력</h2>
 					
 					<form method="post" action="/weather/weather_adding">
 						<%-- 날짜 날씨 미세먼지 --%>
@@ -94,8 +96,16 @@
 			</footer>
 		</div>
 		
+		<%-- 자바스크립트 --%>
 		<script>
 		$(document).ready(function() {
+			
+			$('#date').datepicker({
+                showButtonPanel: true // 오늘 버튼 노출
+                , changeYear: true
+                , changeMonth: true
+            });
+			
             // 모든 데이터피커에 적용
             $.datepicker.setDefaults({
                 dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'] // 요일을 한글로 변경
@@ -106,13 +116,6 @@
             $.datepicker._gotoToday = function(id) {
                 $(id).datepicker('setDate', new Date()).datepicker('hide').blur();
             };
-
-
-            $('#date').datepicker({
-                showButtonPanel: true // 오늘 버튼 노출
-                , minDate:0 // 오늘과 그 이후만 선택 가능
-            });
-
         });
 		</script>
 </body>
