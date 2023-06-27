@@ -36,8 +36,11 @@
 							</thead>
 							<tbody>
 								<c:forEach items="${weatherHistory}" var="weather">
+								<fmt:parseDate value="${weather.getDate()}" pattern="yyyy-MM-dd" var="strDate"/>
 									<tr>
-										<td><fmt:formatDate value="${weather.getDate()}" pattern="yyyy년 M월 dd일"/></td>
+										<td>
+											<fmt:formatDate value="${strDate}" pattern="yyyy년 M월 dd일"/>
+										</td>
 										<td>
 											<c:choose>
 												<c:when test="${weather.getWeather() == '비'}">

@@ -1,7 +1,7 @@
 @charset "UTF-8";
 .wrap{width:1500px;
 	margin:auto;}
-.contents{min-height:700px;}
+.contents{min-height:500px;}
 a, a:hover {
 	color:#FFFFFF;
 	font-size: 20px;
@@ -14,4 +14,11 @@ nav{
 .rightMain{width:88%;}
 
 .tableBox{width:90%}
+
+.input-label {
+	width:130px;
+	text-align: right;
+	margin-right:10px;
+	margin-top:6px;
+}
 
