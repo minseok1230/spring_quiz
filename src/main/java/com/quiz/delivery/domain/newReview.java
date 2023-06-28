@@ -3,7 +3,6 @@ package com.quiz.delivery.domain;
 import java.util.Date;
 
 public class newReview {
-	
 	private int id;
 	private int storeId;
 	private String menu;
@@ -12,7 +11,6 @@ public class newReview {
 	private String review;
 	private Date createdAt;
 	private Date updatedAt;
-	
 	
 	public int getId() {
 		return id;
@@ -64,7 +62,4 @@ public class newReview {
 	}
 	
 	
-	
-	
-
 }

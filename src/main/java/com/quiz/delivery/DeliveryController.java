@@ -49,13 +49,5 @@ public class DeliveryController {
 		
 		return "delivery/getReview";
 	}
-		
-	
 
 }
-
-
-
-
-
-
