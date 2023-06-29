@@ -15,8 +15,6 @@ import com.quiz.lesson02.bo.StoreBO;
 import com.quiz.lesson02.domain.Store;
 
 
-
-
 @Controller
 @RequestMapping("/delivery")
 public class DeliveryController {
@@ -37,6 +35,11 @@ public class DeliveryController {
 	}
 	
 	// 선택된 가게 리뷰 뷰
+	
+	// 날짜
+	// 별점 : point
+	// 리뷰: review
+	// 메뉴 : menu
 	@GetMapping("/store_review_view")
 	public String StoreReviewView(
 			@RequestParam("id") int id,

@@ -30,4 +30,23 @@
  			, NOW()
  		)
  	</insert>
+ 	
+ 	<select id="existexistUrl" parameterType="string" resultType="boolean">
+ 		SELECT 
+ 			COUNT(*)
+ 		FROM 
+ 			`favoritesurl`
+ 		WHERE 
+ 			`url` = #{url}
+ 	</select>
  </mapper>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 

@@ -23,5 +23,10 @@ public class UrlBO {
 	public void addUrl(String name, String url) {
 		urlMapper.insertUrl(name, url);
 	}
+	
+	//중복 확인
+	public boolean existexistUrl(String url) {
+		return urlMapper.existexistUrl(url);
+	}
 
 }

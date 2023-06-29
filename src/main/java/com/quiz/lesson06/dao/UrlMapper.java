@@ -15,4 +15,6 @@ public interface UrlMapper {
 	public void insertUrl(
 			@Param("name") String name, 
 			@Param("url") String url);
+	
+	public boolean existexistUrl(String url);
 }

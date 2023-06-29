@@ -1,6 +1,8 @@
 package com.quiz.lesson06;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,23 +29,42 @@ public class Lesson06Quiz01Controller {
 			return "lesson06/addUrl";
 		}
 		
-		// AJAX가 요청한 곳 => response String(data)이어야 함
+		// AJAX가 요청한 곳 => response String(data)이어야 함 view가 아니여야함
 		@PostMapping("/add_url")
 		@ResponseBody
-			public String addUser(
+			public Map<String, Object> addUrl(
 				@RequestParam("name") String name,
 				@RequestParam("url") String url) {
 			
 				// db insert
 				urlBO.addUrl(name, url);
-				// return String
-				return "성공";
+				
+				// 응답
+				// { "code": 1, "result":"성공"} JSON String
+				Map<String, Object> result = new HashMap<>();
+				result.put("code", 1);
+				result.put("result", "성공");
+				
+				return result;
 			}
+		
+		// 중복 확인
+		@GetMapping("/is_duplication")
+		public Map<String, Boolean> isDuplication(
+				@RequestParam("url") String url){
+			
+			//db 중복조회
+			boolean existUrl = urlBO.existexistUrl(url);
+			
+			Map<String, Boolean> result = new HashMap<>();
+			result.put("isDuplication", existUrl);
+			return result;
+		}
 		
 		// 리스트 화면
 		//입력 성공 페이지
 		@GetMapping("/after_add_url_view")
-		public String afterAddUserView(Model model) {
+		public String afterAddUrlView(Model model) {
 			
 			// select
 			List<FavoritesUrl> FavoritesUrlList = urlBO.getUrl();
