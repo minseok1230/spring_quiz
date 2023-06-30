@@ -1,0 +1,10 @@
+@charset "UTF-8";
+header{height:100px}
+nav{height:40px; background-color: #FF8000;}
+.contents{height:500px}
+footer{height:70px}
+nav .top-menu-font {
+	font-size:13px; 
+	color:#FFFFFF;
+	font-weight: bold;}
+nav .top-menu-font:hover {font-size:13px; color:#000;}

@@ -24,9 +24,18 @@ public class UrlBO {
 		urlMapper.insertUrl(name, url);
 	}
 	
-	//중복 확인
-	public boolean existexistUrl(String url) {
-		return urlMapper.existexistUrl(url);
+	public FavoritesUrl getFavoritesUrl(String url) {
+		return urlMapper.selectFavoritesUrl(url);
 	}
+	
+	//delete
+	public int deleteUrlById(int id) {
+		return urlMapper.deleteUrlById(id);
+	}
+	
+	//중복 확인
+//	public boolean existUrl(String url) {
+//		return urlMapper.existUrl(url);
+//	}
 
 }

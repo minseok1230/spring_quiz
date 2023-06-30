@@ -19,8 +19,10 @@
 		<div class="d-flex justify-content-between">
 			<input type="text" class="form-control col-11" id="url">
 			<button type="button" id="checkBtn" class="btn btn-info col-1">중복확인</button>
+			
 		</div>
-		<small id="urlStatusArea"></small>
+		<small id="duplicationText" class="text-danger d-none">중복된 url입니다.</small>
+		<small id="availableText" class="text-success d-none">저장 가능한 url입니다.</small>
 		<input type="button" id="insertUrl" class="w-100 btn btn-success mt-3" value="추가">
 	</div>
 	
@@ -48,6 +50,12 @@
 					return;
 				}
 				
+				// 문제2) 중복확인 체크 
+				if ($('#availableText').hasClass('d-none')) { // 잘못된 경우 availableText d-none인 경우  
+					alert("중복된 url입니다. 다시 확인해주세요.")
+					return;
+				}
+				
 				// AJAX
 				$.ajax({
 					//request
@@ -69,38 +77,41 @@
 				});
 			});
 			
-			// 중복확인 버튼
+			// 2-1) 중복확인 버튼
 			$('#checkBtn').on('click', function(){
-				// 중복확인 문구 비우기
-				$('#urlStatusArea').empty();
 				
 				let url = $('#url').val().trim();
 				
 				// validation
 				// url 빈칸 확인
 				if (!url){
-					$('#urlStatusArea').append('<span class="text-danger">url이 비어있습니다.</span>');
+					alert("검사할 url을 입력해주세요.");
 					return;
 				} 
 				
+				// AJAX 통신 => DB URL 존재 여부 
 				$.ajax({
+					
 					//request
-					type:"get"
+					type:"post"
 					, url:"/lesson06/quiz01/is_duplication"
-					, data:{"url":url}
+					, data: {"url":url} // 파라미터로 넘길 데이터
 				
 					//response
 					,success:function(data){
+							// {"code":1, "isDuplication": true}
 						if (data.isDuplication) { // 중복
-							$('#urlStatusArea').append('<span class="text-danger">url이 중복입니다.</span>');
+							$('#duplicationText').removeClass('d-none')
+							$('availableText').addClass('d-none')
+						} else{ // 사용 가능(중복 아님)
+							$('#availableText').removeClass('d-none')
+							$('#duplicationText').addClass('d-none')
 						}
 					}
 					, error:function(request, status, error){
 						alert("중복 확인에 실패했습니다.");
 					}
-					
 				});
-				
 			});
 		});
 	</script>

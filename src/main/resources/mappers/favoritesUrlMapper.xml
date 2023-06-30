@@ -31,7 +31,7 @@
  		)
  	</insert>
  	
- 	<select id="existexistUrl" parameterType="string" resultType="boolean">
+ 	<select id="existUrl" parameterType="string" resultType="boolean">
  		SELECT 
  			COUNT(*)
  		FROM 
@@ -39,6 +39,27 @@
  		WHERE 
  			`url` = #{url}
  	</select>
+ 	
+ 	<select id="selectFavoritesUrl" parameterType="string" resultType="com.quiz.lesson06.domain.FavoritesUrl">
+ 		SELECT
+ 			`id`
+			,`name`
+			,`url`
+			,`createdAt`
+			,`updatedAt`
+		FROM
+			`favoritesUrl`
+		WHERE
+			`url` = #{url}
+ 	</select>
+ 	
+ 	<delete id="deleteUrlById" parameterType="int">
+ 		DELETE 
+ 		FROM
+ 			`favoritesurl`
+ 		WHERE 
+ 			`id` = #{id} 
+ 	</delete>
  </mapper>
  
  

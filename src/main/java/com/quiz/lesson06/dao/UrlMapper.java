@@ -16,5 +16,9 @@ public interface UrlMapper {
 			@Param("name") String name, 
 			@Param("url") String url);
 	
-	public boolean existexistUrl(String url);
+	public FavoritesUrl selectFavoritesUrl(String url);
+	
+	public int deleteUrlById(int id);
+	
+//	public boolean existUrl(String url);
 }
