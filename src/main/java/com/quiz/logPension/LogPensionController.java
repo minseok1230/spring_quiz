@@ -35,6 +35,8 @@ public class LogPensionController {
 		return "logPension/reservation";
 	}
 	
+	// 변동사항
+	
 	
 }
 
