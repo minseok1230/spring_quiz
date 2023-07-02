@@ -21,15 +21,15 @@
 		</header>
 		<nav>
 			<ul class="nav nav-fill">
-            	<li class="nav-item"><a href="#" class="nav-link top-menu-font">팬션소개</a></li>
+            	<li class="nav-item"><a href="http://localhost:8080/logPension/reservation_check_view" class="nav-link top-menu-font">팬션소개</a></li>
             	<li class="nav-item"><a href="#" class="nav-link top-menu-font">객실보기</a></li>
-            	<li class="nav-item"><a href="#" class="nav-link top-menu-font">예약하기</a></li>
-            	<li class="nav-item"><a href="#" class="nav-link top-menu-font">예약목록</a></li>
+            	<li class="nav-item"><a href="http://localhost:8080/logPension/reservation_view" class="nav-link top-menu-font">예약하기</a></li>
+            	<li class="nav-item"><a href="http://localhost:8080/logPension/reservation_list_view" class="nav-link top-menu-font">예약목록</a></li>
             </ul>
 		</nav>
 		<div class="contents">
 			<div class="d-flex justify-content-center">
-				<h2>예약 목록 보기</h2>
+				<h2 class="mt-4">예약 목록 보기</h2>
 			</div>
 			<table class="table text-center">
 				<thead>
@@ -51,8 +51,13 @@
 							<td>${booking.day}</td>
 							<td>${booking.headcount}</td>
 							<td>${booking.phoneNumber}</td>
-							<td>${booking.state}</td>
-							<td><button type="button" class="btn btn-danger">삭제</button></td>
+							<c:if test="${booking.state == '대기중'}">
+								<td class="text-info">${booking.state}</td>
+							</c:if>
+							<c:if test="${booking.state == '확정'}">
+								<td class="text-success">${booking.state}</td>
+							</c:if>
+							<td><button type="button" class="deleteBtn btn btn-danger" data-booking-id="${booking.id}">삭제</button></td>
 						</tr>
 					</c:forEach>
 				</tbody>
@@ -65,8 +70,59 @@
 				<small>Copyright 2025 tongnamu. All right reserved</small>
 			</div>
 		</footer>
-		
 	</div>
+	
+	<script>
+		$(document).ready(function(){
+			$('.deleteBtn').on('click',function(){
+
+				let id = $(this).data('booking-id');
+				//alert(bookingId);
+				
+				$.ajax({
+					//request
+					type: "delete"
+					, url : "/logPension/delete_reservation"
+					, data: {"bookingId": id}
+				
+					//response
+					, success: function(data) {
+						if (data.code == 1){
+							location.reload(true);
+						} else{
+							alert(data.errorMessage);
+						}
+					}
+					, error: function(request, status, error){
+						alert("삭제하는데 실패했습니다. 관리자에게 문의해주세요.")
+					}
+				})
+			});
+		});
+	
+	</script>
+	
 
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -5,16 +5,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>예약하기</title>
+<title>예약 확인</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
 <%-- AJAX를 사용하려면 jquery 원본 필요 --%>
 <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
-
-<%--datepicker --%>
-<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
 <!-- 내가만든 스타일시트 -->
 <link href="/css/logPension/style.css" rel="stylesheet" type="text/css">
 </head>
@@ -32,25 +27,40 @@
             </ul>
 		</nav>
 		<div class="contents">
-			<div class="d-flex justify-content-center">
-				<h2 class="mt-2 font-weight-bold">예약 하기</h2>
+			<div>
+				<img src="/image/logPension/test06_banner1.jpg" alt="배너">
 			</div>
-			<div class="form-group d-flex justify-content-center w-100">
-				<div class="w-50">
-					<span>이름</span>
-					<input type="text" id="name" class="form-control">
-					<span>예약날짜</span>
-					<input type="text" id="date"  class="form-control">
-					<span>숙박일수</span>
-					<input type="text" id="day" class="form-control">
-					<span>숙박인원</span>
-					<input type="text" id="headcount" class="form-control">
-					<span>전화번호</span>
-					<input type="text" id="phoneNumber" class="form-control">
-					<button type="button" id="addBookingBtn" class="btn btn-warning w-100 mt-3">예약하기</button>
+			<div class="d-flex">
+				<div class="box-side col-4 d-flex justify-content-center align-items-center">
+					<div class="text-white">
+						<h1>실시간</h1>
+						<h1>예약하기</h1>
+					</div>	
+				</div>
+				<div class="box col-4 d-flex justify-content-center align-items-center">
+					<div>
+						<h4 class="text-white">예약확인</h4>
+						<div class="d-flex align-items-center justify-content-end mb-2">
+							<label for="name" class="text-white mr-3">이름:</label>
+							<input type="text" class="form-control col-8" id="name">
+						</div>
+						<div class="d-flex align-items-center justify-content-end">
+							<label for="phoneNumber" class="text-white mr-3">전화번호:</label>
+							<input type="text" class="form-control col-8" id="phoneNumber">
+						</div>
+						<div class="text-right mt-2">
+							<button type="button" id="checkBookingBtn" class="btn btn-success">조회 하기</button>
+						</div>
+					</div>
+				</div>
+				<div class="box-side col-4 d-flex justify-content-center align-items-center">
+					<div class="text-white">
+						<h4>예약문의:</h4>
+						<h3>010-</h3>
+						<h3>0000-1111</h3>
+					</div>
 				</div>
 			</div>
-			
 			
 		</div>
 		<footer>
@@ -63,36 +73,15 @@
 	</div>
 	
 	<script>
-		$(document).ready(function() {
-
-			$('#date').datepicker({
-				changeMonth : true, // 월 셀렉트 박스 
-				changeYear : true, // 년 셀렉트 박스 
-				dateFormat : "yy-mm-dd", // 표시 포멧 
-			});
+		$(document).ready(function(){
 			
-			$('#addBookingBtn').on('click', function(){
+			$('#checkBookingBtn').on('click',function(){
 				let name = $('#name').val().trim();
-				let date = $('#date').val().trim();
-				let day = $('#day').val();
-				let headcount = $('#headcount').val();
 				let phoneNumber = $('#phoneNumber').val().trim();
 				
 				//validation
 				if (name == ''){
 					alert("이름을 입력하세요");
-					return;
-				}
-				if (date == ''){
-					alert("날짜를 입력하세요");
-					return;
-				}
-				if (day == ''){
-					alert("숙박일수를 입력하세요");
-					return;
-				}
-				if (headcount == ''){
-					alert("인원수를 입력하세요");
 					return;
 				}
 				if (phoneNumber == ''){
@@ -101,33 +90,34 @@
 				}
 				
 				$.ajax({
-					// request
-					type: "post"
-					, url : "/logPension/add_reservation"
-					, data : {"name":name, "date":date, "day":day, "headcount":headcount, "phoneNumber":phoneNumber }
-					
-					// response
-					, success: function(data){
+					//request
+						type: "post"
+						, url: "/logPension/check_reservation"
+						, data: {"name":name, "phoneNumber":phoneNumber}
+					//response
+					, success:function(data){
 						if (data.code == 1){
-							location.href = "/logPension/reservation_list_view"
+							let date = new Date(data.result.date)
+							alert("이름: " + data.result.name  +
+							"\n날짜: " + date.getFullYear() + "-" + (date.getMonth()+1) + "-" + date.getDate() +
+							"\n일수: " + data.result.day  +
+							"\n인원: " + data.result.headcount  +
+							"\n상태: " + data.result.state);
 						} else{
 							alert(data.errorMessage);
 						}
 					}
 					, error: function(request, status, error){
-						alert("추가하는데 실패했습니다. 관리자에게 문의하세요")
+						alert("조회하는데 실패하였습니다. 관리자에게 문의하세요.")
 					}
 				});
 			});
+			
 		});
 	</script>
 
 </body>
 </html>
-
-
-
-
 
 
 
