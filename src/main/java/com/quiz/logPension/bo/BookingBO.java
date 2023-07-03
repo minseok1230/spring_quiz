@@ -20,15 +20,36 @@ public class BookingBO {
 		return bookingMapper.selectBookingList();
 	}
 	
+	// 삭제(delete)
 	public int deleteBookingById(int id) {
 		return bookingMapper.deleteBookingById(id);
 	}
 	
+	// 추가(insert)
 	public int addBooking(String name, String date, int day, int headcount, String phoneNumber) {
 		return bookingMapper.insertBooking(name, date, day, headcount, phoneNumber);
 	}
 	
+	// 조건 정보(select by name/phoneNumber) 
 	public Booking checkByNameByPN(String name, String phoneNumber){
-		return bookingMapper.checkByNameByPN(name, phoneNumber);
+		// 가능한 값: [], [bookingA, bookingB...]
+		List<Booking> bookingList = bookingMapper.checkByNameByPN(name, phoneNumber);
+		
+		if (bookingList.isEmpty()) {
+			return null;
+		} else {
+			return bookingList.get(bookingList.size() - 1); // 마지막 값을 준다. (최신예약)
+		}
 	}
 }
+
+
+
+
+
+
+
+
+
+
+

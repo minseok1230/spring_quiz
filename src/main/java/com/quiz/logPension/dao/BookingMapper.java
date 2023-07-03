@@ -22,7 +22,7 @@ public interface BookingMapper {
 			@Param("headcount") int headcount, 
 			@Param("phoneNumber") String phoneNumber);
 	
-	public Booking checkByNameByPN(
+	public List<Booking> checkByNameByPN(
 			@Param("name") String name, 
 			@Param("phoneNumber") String phoneNumber);
 

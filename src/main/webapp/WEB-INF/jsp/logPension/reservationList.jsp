@@ -40,14 +40,14 @@
 						<th>숙박인원</th>
 						<th>전화번호</th>
 						<th>예약상태</th>
-						<th>삭제</th>
+						<th></th>
 					</tr>
 				</thead>
 				<tbody>
 					<c:forEach items="${bookList}" var="booking">
 						<tr>
 							<td>${booking.name}</td>
-							<td><fmt:formatDate value="${booking.date}" pattern="yyyy년 M월 dd일"/></td>
+							<td><fmt:formatDate value="${booking.date}" pattern="yyyy년 M월 d일"/></td>
 							<td>${booking.day}</td>
 							<td>${booking.headcount}</td>
 							<td>${booking.phoneNumber}</td>
@@ -77,7 +77,7 @@
 			$('.deleteBtn').on('click',function(){
 
 				let id = $(this).data('booking-id');
-				//alert(bookingId);
+				//alert(id);
 				
 				$.ajax({
 					//request
@@ -88,8 +88,9 @@
 					//response
 					, success: function(data) {
 						if (data.code == 1){
+							alert("삭제 되었습니다.");
 							location.reload(true);
-						} else{
+						} else {
 							alert(data.errorMessage);
 						}
 					}

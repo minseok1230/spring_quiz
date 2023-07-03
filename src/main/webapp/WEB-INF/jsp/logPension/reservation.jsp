@@ -32,21 +32,21 @@
             </ul>
 		</nav>
 		<div class="contents">
-			<div class="d-flex justify-content-center">
-				<h2 class="mt-2 font-weight-bold">예약 하기</h2>
+			<div class="my-4 d-flex justify-content-center">
+				<h2 class="font-weight-bold">예약 하기</h2>
 			</div>
 			<div class="form-group d-flex justify-content-center w-100">
 				<div class="w-50">
 					<span>이름</span>
-					<input type="text" id="name" class="form-control">
+					<input type="text" id="name" class="form-control my-2">
 					<span>예약날짜</span>
-					<input type="text" id="date"  class="form-control">
+					<input type="text" id="date"  class="form-control my-2">
 					<span>숙박일수</span>
-					<input type="text" id="day" class="form-control">
+					<input type="text" id="day" class="form-control my-2">
 					<span>숙박인원</span>
-					<input type="text" id="headcount" class="form-control">
+					<input type="text" id="headcount" class="form-control my-2">
 					<span>전화번호</span>
-					<input type="text" id="phoneNumber" class="form-control">
+					<input type="text" id="phoneNumber" class="form-control my-2">
 					<button type="button" id="addBookingBtn" class="btn btn-warning w-100 mt-3">예약하기</button>
 				</div>
 			</div>
@@ -64,11 +64,13 @@
 	
 	<script>
 		$(document).ready(function() {
-
+			
+			// 날짜 선택 데이트 피커
 			$('#date').datepicker({
 				changeMonth : true, // 월 셀렉트 박스 
 				changeYear : true, // 년 셀렉트 박스 
 				dateFormat : "yy-mm-dd", // 표시 포멧 
+				minDate: 0
 			});
 			
 			$('#addBookingBtn').on('click', function(){
@@ -83,16 +85,24 @@
 					alert("이름을 입력하세요");
 					return;
 				}
-				if (date == ''){
+				if (date.length < 1){
 					alert("날짜를 입력하세요");
 					return;
 				}
-				if (day == ''){
+				if (!day){
 					alert("숙박일수를 입력하세요");
+					return;
+				}
+				if (isNaN(day)){ // 숫자가 입력받을때 참
+					alert("숙박일수는 숫자만 입력 가능합니다.");
 					return;
 				}
 				if (headcount == ''){
 					alert("인원수를 입력하세요");
+					return;
+				}
+				if (isNaN(headcount)){ // 숫자가 입력받을때 참
+					alert("숙박인원은 숫자만 입력 가능합니다.");
 					return;
 				}
 				if (phoneNumber == ''){
@@ -100,6 +110,8 @@
 					return;
 				}
 				
+				
+				// AJAX 요청 - insert
 				$.ajax({
 					// request
 					type: "post"
@@ -109,13 +121,14 @@
 					// response
 					, success: function(data){
 						if (data.code == 1){
+							alert("예약되었습니다.");
 							location.href = "/logPension/reservation_list_view"
 						} else{
 							alert(data.errorMessage);
 						}
 					}
 					, error: function(request, status, error){
-						alert("추가하는데 실패했습니다. 관리자에게 문의하세요")
+						alert("예약하는데 실패했습니다. 관리자에게 문의하세요")
 					}
 				});
 			});

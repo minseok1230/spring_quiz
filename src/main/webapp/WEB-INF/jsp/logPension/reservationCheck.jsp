@@ -97,13 +97,16 @@
 					//response
 					, success:function(data){
 						if (data.code == 1){
+							// 성공
 							let date = new Date(data.result.date)
 							alert("이름: " + data.result.name  +
-							"\n날짜: " + date.getFullYear() + "-" + (date.getMonth()+1) + "-" + date.getDate() +
-							"\n일수: " + data.result.day  +
-							"\n인원: " + data.result.headcount  +
+							//"\n날짜: " + date.getFullYear() + "-" + (date.getMonth()+1) + "-" + date.getDate() +
+							"\n날짜: " + data.result.date.slice(0,10) +
+							"\n일수: " + data.result.day +
+							"\n인원: " + data.result.headcount +
 							"\n상태: " + data.result.state);
 						} else{
+							// 실패
 							alert(data.errorMessage);
 						}
 					}

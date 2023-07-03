@@ -24,8 +24,8 @@ public class LogPensionController {
 	@Autowired
 	private BookingBO bookingBO;
 	
-	// 1)예약 목록 보기 (처음화면 + selct 정보)
-	// /logPension/reservation_list_view
+	// 1)예약 목록 보기 (처음화면 + select 정보)
+	// http://localhost:8080/logPension/reservation_list_view
 	@GetMapping("/reservation_list_view")
 	public String reservationListView(Model model) {
 		
@@ -47,7 +47,6 @@ public class LogPensionController {
 	// http://localhost:8080/logPension/reservation_check_view
 	@GetMapping("/reservation_check_view")
 	public String reservationCheckView() {
-		
 		return "logPension/reservationCheck";
 	}
 	
@@ -56,34 +55,35 @@ public class LogPensionController {
 	@ResponseBody
 	public Map<String, Object> checkReservationByNameByPN(
 			@RequestParam("name") String name,
-			@RequestParam("phoneNumber") String phoneNumber
-			){
+			@RequestParam("phoneNumber") String phoneNumber){
 		
 		// 조회 하기 
-			Booking searchBooking = bookingBO.checkByNameByPN(name, phoneNumber);
-			Map<String, Object> result = new HashMap<>();
+		Booking searchBooking = bookingBO.checkByNameByPN(name, phoneNumber);
+		
+		// 응답 JSON 
+		Map<String, Object> result = new HashMap<>();
 			
-			if (searchBooking == null) {
-				result.put("code", 500);
-				result.put("errorMessage", "예약 정보가 없습니다.");
-			} else {
-				result.put("code", 1);
-				result.put("result", searchBooking);
-			}
-			
-			return result;
+		if (searchBooking == null) {
+			result.put("code", 300);
+			result.put("errorMessage", "예약 정보가 없습니다.");
+		} else {
+			result.put("code", 1);
+			result.put("result", searchBooking);
+		}
+		return result;
 	}
-	
 	
 	// AJAX 예약 조회 삭제 페이지
 	@DeleteMapping("/delete_reservation")
 	@ResponseBody
 	public Map<String, Object> deleteReservation(
 			@RequestParam("bookingId") int id){
+		
+		// db delete
 		int deleteRow = bookingBO.deleteBookingById(id);
 		
 		Map<String, Object> result = new HashMap<>();
-		if (deleteRow == 1) {
+		if (deleteRow > 0) {
 			result.put("code", 1);
 			result.put("result", "success");
 		} else {
@@ -99,7 +99,7 @@ public class LogPensionController {
 	@ResponseBody
 	public Map<String, Object> addReservation(
 			@RequestParam("name") String name,
-			@RequestParam("date") String date,
+			@RequestParam("date") String date, // DateTimeFormat을 붙이고 Date 객체로 받아와도 된다.
 			@RequestParam("day") int day,
 			@RequestParam("headcount") int headcount,
 			@RequestParam("phoneNumber") String phoneNumber){
@@ -107,6 +107,7 @@ public class LogPensionController {
 		//db insert
 		int addRow = bookingBO.addBooking(name, date, day, headcount, phoneNumber);
 		
+		// 응답
 		Map<String, Object> result = new HashMap<>();
 		if (addRow > 0) {
 			result.put("code", 1);

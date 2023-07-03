@@ -8,6 +8,7 @@ public class Booking {
 	private String name;
 	private int headcount;
 	private int day;
+	// @DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date date;
 	private String phoneNumber;
 	private String state;
