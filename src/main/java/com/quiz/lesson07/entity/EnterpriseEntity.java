@@ -20,7 +20,7 @@ import lombok.ToString;
 @ToString // 객체값 이쁘게 출력
 @AllArgsConstructor // 파라미터 있는 생성자
 @NoArgsConstructor // 기본 생성자
-@Builder // setter
+@Builder(toBuilder = true) // setter
 @Getter //getter
 @Table(name = "enterprise")
 @Entity

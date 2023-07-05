@@ -23,7 +23,22 @@ public class EnterpriseBO {
 				.build()
 				);
 		return enterprise;
-				
+	}
+	
+	public EnterpriseEntity updateEnterpriseById(int id, String scale, int headcount) {
+		// 기존 데이터 조회 (id로)
+		EnterpriseEntity enterprise = enterpriseRepository.findById(id).orElse(null);
+		
+		// entity 변경 (scale, headcount)
+		if (enterprise != null) {
+			enterprise = enterprise.toBuilder()
+			.scale(scale)
+			.headcount(headcount)
+			.build();
+			
+			enterprise = enterpriseRepository.save(enterprise);
+		}
+		return enterprise;
 	}
 
 }
