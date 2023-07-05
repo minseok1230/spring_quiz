@@ -1,5 +1,7 @@
 package com.quiz.lesson07.bo;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +27,9 @@ public class EnterpriseBO {
 		return enterprise;
 	}
 	
+	
+	// input: id, scale, headcount
+	// output: CompanyEntity
 	public EnterpriseEntity updateEnterpriseById(int id, String scale, int headcount) {
 		// 기존 데이터 조회 (id로)
 		EnterpriseEntity enterprise = enterpriseRepository.findById(id).orElse(null);
@@ -40,5 +45,20 @@ public class EnterpriseBO {
 		}
 		return enterprise;
 	}
+	
+	// delete
+	public void deleteEnterpriseById(int id) {
+		Optional<EnterpriseEntity> enterpriseOptional =  enterpriseRepository.findById(id);
+		enterpriseOptional.ifPresent(s -> enterpriseRepository.delete(s));
+	}
 
 }
+
+
+
+
+
+
+
+
+

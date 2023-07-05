@@ -41,9 +41,30 @@ public class Lesson07Quiz01RestController {
 	// http://localhost:8080/lesson07/quiz01/update
 	@GetMapping("/update")
 	public EnterpriseEntity update() {
-		// id = 8  -> scale / headcout 변경
+		// id = 8  -> scale: 중소기업 / headcout: 34 변경
 		EnterpriseEntity enterprise = enterpriseBO.updateEnterpriseById(8,"중소기업",34);
 		return enterprise;
-		
+	}
+	
+	// D: DELETE
+	// http://localhost:8080/lesson07/quiz01/delete
+	@GetMapping("/delete")
+	public String delete() {
+		//id : 8
+		enterpriseBO.deleteEnterpriseById(8);
+		return "수행 완료";
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
